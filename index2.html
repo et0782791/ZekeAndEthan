@@ -3,8 +3,9 @@
 
 <head>
     <title>Pizza Order Forum</title>
-
+    <script defer src="app.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta charset="UTF8">
 </head>
 
 <body onload="pizzaNumber(),pizzaType()">
@@ -16,107 +17,10 @@
         <div id="selectNumOfPizzas">How Many Pizza's? </div>
         <div id="pizzaType">Select Toppings: <div class='pizzas'>Pizza 1: </div></div>
         <div id="displayOrder" class="order"></div>
-        <button type= "submit" onclick="displayOrder()">Submit Order</button>
+        <button type="button" onclick="displayOrder()">Submit Order</button>
         <button type = "reset" >Reset Order</button>
     </form>
-
-    <script>
-        // function to display the number of pizzas
-        function pizzaNumber() {
-            // Select ID NumOfPizzas from Div element
-            var myDiv = document.getElementById("selectNumOfPizzas");
-
-            //Create array of options to be added
-            var pizzaNumberArray = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-            //Create and append select list
-            var selectNumber = document.createElement("select");
-            selectNumber.id = "selectNumber";
-            myDiv.appendChild(selectNumber);
-
-            //Create and append the options
-            for (var i = 0; i < pizzaNumberArray.length; i++) {
-                var option = document.createElement("option");
-                option.value = pizzaNumberArray[i];
-                option.text = pizzaNumberArray[i];              
-                selectNumber.appendChild(option);
-            }
-
-            loadAmountOfPizzas();
-
-        }
-        //creates onclick events to each individual pizza under select toppings
-        function loadAmountOfPizzas(){
-            var options = document.getElementsByTagName("option");
-            for(let i = 0; i < options.length; ++i){
-                options[i].onclick = function(){
-                    document.getElementById("pizzaType").innerHTML = "Select Toppings: "
-                    for(let l = 0; l < options[i].value;++l){
-                        document.getElementById("pizzaType").innerHTML += "<div class='pizzas'>" + "Pizza " + (l + 1) + "  " + "</div>";
-                    }   
-                    pizzaType();                 
-                }
-            }
-        }
-
-        // Function to display the pizza toppings
-        function pizzaType() {
-
-            var myDiv = document.getElementsByClassName("pizzas");
-            //Create array of toppings
-            var pizzaToppingArray = ["Cheese", "Pepperoni", "Sausage", "Pineapples", "Black Olives"];
-            var pizzaToppingPrice = [2,3,8,4,3];
-            for(let l = 0; l < myDiv.length; ++l){
-
-            //Create and append select list
-            var toppings = document.createElement("select");
-            // sets the id
-            toppings.id = "toppingSelect";
-            // sets the size of the select 
-            toppings.size = "1";
-            // create class name
-            toppings.className = "toppins";
-            // appends to mydiv
-            myDiv[l].appendChild(toppings);
-            
-            //Create and append the options
-            for (var i = 0; i < pizzaToppingArray.length; i++) {
-                var option = document.createElement("option");
-                option.value = pizzaToppingPrice[i];
-                option.text = pizzaToppingArray[i];
-                toppings.appendChild(option);
-            }
-            // This allows the user to select multiple items from the select box
-            document.getElementById("toppingSelect").multiple = false;
-            }
-        }
-        
-
-        // Funciton to display the order
-        function displayOrder() {
-            var firstName = document.getElementById("fname").value;
-            var lastName = document.getElementById("lstname").value;
-            var numOfPizzas = document.getElementById("selectNumber").value;
-            // need to figure out how to display all the toppings, probably through a getelementsbyclass name? keeps coming back as undefined
-            var toppings = document.getElementsByTagName("select").values;
-
-            document.write("<h1>Thank you!<h1></br>");
-            document.write("<h2>Your order has been placed!<h2></br>");
-            document.write("Order Details: \nFIRST NAME: "+firstName+", LAST NAME: " +lastName+", NUMBER OF PIZZAS: "+numOfPizzas+", TOPPINGS: "+toppings+", Total Price:");
-
-        }
-        function calculatePrice()
-        {
-            // calculate price code goes here :-)
-            // Also, incase you didn't see above on line 81, we need to figure out a way to show the toppings chosen when we display the order
-        }
-        function addPizzaFlavor()
-        {
-            // I think she might be wanting the user to be able to add toppings with input, if so:
-            //https://www.w3schools.com/jsref/met_select_add.asp
-            // ^^^^^^^^^^^ This should be a good reference. 
-        }
-    </script>
+    <div id="OrderReceipt"></div>
 </body>
 
 </html>

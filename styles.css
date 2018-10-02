@@ -5,6 +5,7 @@ body {
     font-size: 25px;
     background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs5FtRG4p7xaINAsAJvCHPI6pwOsn3_SIupRyiZxWtG9ubWAzm');
     background-size: cover;
+    
 }
 
 h1 {
@@ -18,6 +19,7 @@ form {
     border-radius: 5px;
     height: auto;
     width: 450px;
+    margin:auto;
 }
 
 option {
@@ -35,4 +37,13 @@ input {
     font-size: 17px;
     font-weight: bold;
     display: inline-block;
+}
+
+#OrderReceipt{
+    background-color: #211e1e;
+    color: white;
+    border-radius: 5px;
+    height: auto;
+    width: 450px;
+    margin:auto;
 }
