@@ -14,7 +14,7 @@
         Last Name: <input type="text" name="lstname" id="lstname" placeholder="Doe" required><br>
         Phone Number: <input type="text" name="phoneNumber" id="phNum" placeholder="xxx-xxx-xxxx" required><br>
         <div id="selectNumOfPizzas">How Many Pizza's? </div>
-        <div id="pizzaType">Select Toppings: </div>
+        <div id="pizzaType">Select Toppings: <div class='pizzas'>Pizza 1: </div></div>
         <div id="displayOrder" class="order"></div>
         <button type= "submit" onclick="displayOrder()">Submit Order</button>
         <button type = "reset" >Reset Order</button>
@@ -27,7 +27,7 @@
             var myDiv = document.getElementById("selectNumOfPizzas");
 
             //Create array of options to be added
-            var pizzaNumberArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            var pizzaNumberArray = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
             //Create and append select list
             var selectNumber = document.createElement("select");
@@ -38,17 +38,35 @@
             for (var i = 0; i < pizzaNumberArray.length; i++) {
                 var option = document.createElement("option");
                 option.value = pizzaNumberArray[i];
-                option.text = pizzaNumberArray[i];
+                option.text = pizzaNumberArray[i];              
                 selectNumber.appendChild(option);
             }
+
+            loadAmountOfPizzas();
+
         }
+        //creates onclick events to each individual pizza under select toppings
+        function loadAmountOfPizzas(){
+            var options = document.getElementsByTagName("option");
+            for(let i = 0; i < options.length; ++i){
+                options[i].onclick = function(){
+                    document.getElementById("pizzaType").innerHTML = "Select Toppings: "
+                    for(let l = 0; l < options[i].value;++l){
+                        document.getElementById("pizzaType").innerHTML += "<div class='pizzas'>" + "Pizza " + (l + 1) + "  " + "</div>";
+                    }   
+                    pizzaType();                 
+                }
+            }
+        }
+
         // Function to display the pizza toppings
         function pizzaType() {
 
-            var myDiv = document.getElementById("pizzaType");
-
+            var myDiv = document.getElementsByClassName("pizzas");
             //Create array of toppings
             var pizzaToppingArray = ["Cheese", "Pepperoni", "Sausage", "Pineapples", "Black Olives"];
+            var pizzaToppingPrice = [2,3,8,4,3];
+            for(let l = 0; l < myDiv.length; ++l){
 
             //Create and append select list
             var toppings = document.createElement("select");
@@ -59,18 +77,20 @@
             // create class name
             toppings.className = "toppins";
             // appends to mydiv
-            myDiv.appendChild(toppings);
-
+            myDiv[l].appendChild(toppings);
+            
             //Create and append the options
             for (var i = 0; i < pizzaToppingArray.length; i++) {
                 var option = document.createElement("option");
-                option.value = pizzaToppingArray[i];
+                option.value = pizzaToppingPrice[i];
                 option.text = pizzaToppingArray[i];
                 toppings.appendChild(option);
             }
             // This allows the user to select multiple items from the select box
-            document.getElementById("toppingSelect").multiple = true;
+            document.getElementById("toppingSelect").multiple = false;
+            }
         }
+        
 
         // Funciton to display the order
         function displayOrder() {
